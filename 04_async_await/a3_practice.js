@@ -12,14 +12,13 @@ fetch("https://jsonplaceholder.typicode.com/users")
   });
 
 async function getTheLastPostOfTheLastUser() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users'); // Promise (fulfilled)
-  const users = await response.json(); // Promise (fulfilled)
-  console.log(users)
+  const response = await fetch('https://jsonplaceholder.typicode.com/users');
+  const users = await response.json();
   const lastUser = users[users.length - 1];
   const { id } = lastUser;
-  const lastResponse = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
-  const posts = await lastResponse.json();
-  const lastPost = posts[posts.length - 1];
+  const idUser = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`);
+  const lastResponse = await idUser.json();
+  const lastPost = lastResponse[lastResponse.length - 1];
   return lastPost;
 }
 
